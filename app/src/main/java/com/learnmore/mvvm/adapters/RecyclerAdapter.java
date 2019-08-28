@@ -3,6 +3,7 @@ package com.learnmore.mvvm.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private List<NicePlace> mNicePlace = new ArrayList<>();
     private Context context;
 
-    public RecyclerAdapter(Context context ,List<NicePlace> mNicePlace) {
+    public RecyclerAdapter(Context context, List<NicePlace> mNicePlace) {
         this.mNicePlace = mNicePlace;
         this.context = context;
     }
@@ -38,6 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.mName.setText(mNicePlace.get(i).getTitle());
+        Log.e(TAG, "onBindViewHolder: " + mNicePlace.get(i).getImageUrl()+"\n");
         RequestOptions defaultOprions = new RequestOptions().error(R.drawable.ic_launcher_background);
         Glide.with(context).setDefaultRequestOptions(defaultOprions)
                 .load(mNicePlace.get(i).getImageUrl())

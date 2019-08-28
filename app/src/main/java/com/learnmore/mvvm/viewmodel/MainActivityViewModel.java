@@ -27,6 +27,8 @@ public class MainActivityViewModel extends ViewModel {
 
     public void addNewValue(final NicePlace nicePlace) {
         mIsUpdating.setValue(true);
+
+        // asn task just for testing don't use it
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPostExecute(Void aVoid) {

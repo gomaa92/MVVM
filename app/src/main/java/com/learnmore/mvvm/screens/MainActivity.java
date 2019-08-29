@@ -1,9 +1,7 @@
 package com.learnmore.mvvm.screens;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +11,10 @@ import android.widget.ProgressBar;
 
 import com.learnmore.mvvm.R;
 import com.learnmore.mvvm.adapters.RecyclerAdapter;
-import com.learnmore.mvvm.models.NicePlace;
+import com.learnmore.mvvm.models.Post;
 import com.learnmore.mvvm.viewmodel.MainActivityViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private ProgressBar progressBar;
     private MainActivityViewModel mainActivityViewModel;
+    List<Post> myPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,25 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mainActivityViewModel.init();
-        mainActivityViewModel.getNicePlaces().observe(this, new Observer<List<NicePlace>>() {
+        myPosts = new ArrayList<>();
+
+      /*  mainActivityViewModel.getNicePlaces().observe(this, new Observer<List<NicePlace>>() {
             @Override
             public void onChanged(@Nullable List<NicePlace> nicePlaces) {
                 adapter.notifyDataSetChanged();
             }
+        });*/
+
+        mainActivityViewModel.posts.subscribe(posts -> {
+            for (Post post : posts) {
+                myPosts.add(post);
+                adapter.notifyDataSetChanged();
+            }
         });
-        mainActivityViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
+
+
+
+     /*   mainActivityViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
@@ -52,18 +64,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivityViewModel.addNewValue(new NicePlace("title ", "https://www.w3schools.com/howto/img_nature_wide.jpg"));
+                // mainActivityViewModel.addNewValue(new NicePlace("title ", "https://www.w3schools.com/howto/img_nature_wide.jpg"));
             }
-        });
+        });*/
 
         initRecyclerView();
     }
 
     private void initRecyclerView() {
-        adapter = new RecyclerAdapter(this, mainActivityViewModel.getNicePlaces().getValue());
+        adapter = new RecyclerAdapter(this, myPosts);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);

@@ -3,14 +3,19 @@ package com.learnmore.mvvm.repositories;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.learnmore.mvvm.models.NicePlace;
+import com.learnmore.mvvm.models.Post;
+import com.learnmore.mvvm.network.ServicesClass;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 public class NicePlaceRepo {
 
     private static NicePlaceRepo instance;
     private ArrayList<NicePlace> dataSet = new ArrayList<>();
+    ServicesClass servicesClass = new ServicesClass();
 
     public static NicePlaceRepo getInstance() {
         if (instance == null) {
@@ -22,9 +27,18 @@ public class NicePlaceRepo {
     // pretend to get data from webservices
     public MutableLiveData<List<NicePlace>> getNicePlaces() {
         setNicePlaces();
+
+
         MutableLiveData<List<NicePlace>> data = new MutableLiveData<>();
         data.setValue(dataSet);
         return data;
+
+    }
+
+    // for call service
+    public Observable<List<Post>> getPosts() {
+        return servicesClass.getPosts();
+
 
     }
 

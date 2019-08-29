@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.learnmore.mvvm.R;
-import com.learnmore.mvvm.models.NicePlace;
+import com.learnmore.mvvm.models.Post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +18,10 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    private List<NicePlace> mNicePlace = new ArrayList<>();
+    private List<Post> mNicePlace = new ArrayList<>();
     private Context context;
 
-    public RecyclerAdapter(Context context, List<NicePlace> mNicePlace) {
+    public RecyclerAdapter(Context context, List<Post> mNicePlace) {
         this.mNicePlace = mNicePlace;
         this.context = context;
     }
@@ -39,9 +38,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.mName.setText(mNicePlace.get(i).getTitle());
         RequestOptions defaultOprions = new RequestOptions().error(R.drawable.ic_launcher_background);
-        Glide.with(context).setDefaultRequestOptions(defaultOprions)
+      /*  Glide.with(context).setDefaultRequestOptions(defaultOprions)
                 .load(mNicePlace.get(i).getImageUrl())
-                .into(viewHolder.mImageView);
+                .into(viewHolder.mImageView);*/
 
 
     }

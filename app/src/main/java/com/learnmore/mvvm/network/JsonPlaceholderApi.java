@@ -2,7 +2,7 @@ package com.learnmore.mvvm.network;
 
 import com.learnmore.mvvm.models.Post;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 public interface JsonPlaceholderApi {
 
     @GET("posts")
-    Observable<ArrayList<Post>> getPosts();
+    Observable<List<Post>> getPosts();
 }

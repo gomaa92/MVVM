@@ -30,10 +30,12 @@ public class MainActivityViewModel extends ViewModel {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
                 List<NicePlace> currentPlaces = mNicePlaces.getValue();
                 currentPlaces.add(nicePlace);
+                mNicePlaces.postValue(currentPlaces);
                 mIsUpdating.postValue(false);
-                super.onPostExecute(aVoid);
+
             }
 
             @Override
@@ -45,7 +47,7 @@ public class MainActivityViewModel extends ViewModel {
                 }
                 return null;
             }
-        };
+        }.execute();
 
     }
 

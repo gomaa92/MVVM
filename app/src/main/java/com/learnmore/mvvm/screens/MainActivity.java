@@ -1,4 +1,4 @@
-package com.learnmore.mvvm;
+package com.learnmore.mvvm.screens;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.learnmore.mvvm.R;
 import com.learnmore.mvvm.adapters.RecyclerAdapter;
 import com.learnmore.mvvm.models.NicePlace;
 import com.learnmore.mvvm.viewmodel.MainActivityViewModel;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivityViewModel.addNewValue(new NicePlace());
+                mainActivityViewModel.addNewValue(new NicePlace("title ", "https://www.w3schools.com/howto/img_nature_wide.jpg"));
             }
         });
 

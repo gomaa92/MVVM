@@ -45,12 +45,10 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         mainActivityViewModel.posts.subscribe(posts -> {
-            for (Post post : posts) {
-                myPosts.add(post);
-                adapter.notifyDataSetChanged();
-            }
+            adapter.setItems(posts);
         });
 
+        mainActivityViewModel.getPosts();
 
 
      /*   mainActivityViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {

@@ -50,6 +50,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return mNicePlace.size();
     }
 
+    public void setItems(List<Post> posts) {
+        mNicePlace=posts;
+        notifyDataSetChanged();
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView mImageView;

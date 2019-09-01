@@ -3,7 +3,6 @@ package com.learnmore.mvvm.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.util.Log;
 
 import com.learnmore.mvvm.models.NicePlace;
 import com.learnmore.mvvm.models.Post;
@@ -14,8 +13,6 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
-
-import static android.support.constraint.Constraints.TAG;
 
 public class MainActivityViewModel extends ViewModel {
 
@@ -45,7 +42,7 @@ public class MainActivityViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(it -> {
-                   // Log.e(TAG, "getPosts: "+it.get(0).getTitle() );
+                    // Log.e(TAG, "getPosts: "+it.get(0).getTitle() );
                     posts.onNext(it);
                 }, Throwable::printStackTrace);
 

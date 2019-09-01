@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.learnmore.mvvm.R;
-import com.learnmore.mvvm.adapters.RecyclerAdapter;
+import com.learnmore.mvvm.screens.adapters.RecyclerAdapter;
 import com.learnmore.mvvm.models.Post;
 import com.learnmore.mvvm.viewmodel.MainActivityViewModel;
 

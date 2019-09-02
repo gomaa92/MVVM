@@ -18,8 +18,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     private List<Post> mNicePlace = new ArrayList<>();
     private Context context;
 
-    public RecyclerAdapter(Context context, List<Post> mNicePlace) {
-        this.mNicePlace = mNicePlace;
+    public RecyclerAdapter(Context context) {
+
         this.context = context;
     }
 

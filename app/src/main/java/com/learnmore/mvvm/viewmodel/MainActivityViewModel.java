@@ -20,6 +20,7 @@ public class MainActivityViewModel extends ViewModel {
     private NicePlaceRepo repo;
     MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
     public PublishSubject<List<Post>> posts = PublishSubject.create();
+    public PublishSubject<Boolean> errorGetPosts = PublishSubject.create();
 
 
     public void init() {
@@ -44,7 +45,9 @@ public class MainActivityViewModel extends ViewModel {
                 .subscribe(it -> {
                     // Log.e(TAG, "getPosts: "+it.get(0).getTitle() );
                     posts.onNext(it);
-                }, Throwable::printStackTrace);
+                }, throwable -> {
+                    errorGetPosts.onNext(true);
+                });
 
     }
 

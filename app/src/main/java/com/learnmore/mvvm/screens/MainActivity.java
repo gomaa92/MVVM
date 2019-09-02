@@ -8,10 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.learnmore.mvvm.R;
-import com.learnmore.mvvm.screens.adapters.RecyclerAdapter;
 import com.learnmore.mvvm.models.Post;
+import com.learnmore.mvvm.screens.adapters.RecyclerAdapter;
 import com.learnmore.mvvm.viewmodel.MainActivityViewModel;
 
 import java.util.ArrayList;
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivityViewModel.posts.subscribe(posts -> {
             adapter.setItems(posts);
+        });
+
+        mainActivityViewModel.errorGetPosts.subscribe(posts -> {
+            if (posts == true) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
         });
 
         mainActivityViewModel.getPosts();

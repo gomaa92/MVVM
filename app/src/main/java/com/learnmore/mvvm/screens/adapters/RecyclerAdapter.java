@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.learnmore.mvvm.R;
+import com.learnmore.mvvm.models.Comment;
 import com.learnmore.mvvm.models.Post;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private List<Post> mNicePlace = new ArrayList<>();
+    private List<Comment> mComments = new ArrayList<>();
     private Context context;
 
     public RecyclerAdapter(Context context) {
@@ -33,14 +35,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.userId.setText("User Id: " + mNicePlace.get(i).getUserId().toString());
+       /* viewHolder.userId.setText("User Id: " + mNicePlace.get(i).getUserId().toString());
         viewHolder.id.setText("id: " + mNicePlace.get(i).getUserId().toString());
         viewHolder.title.setText("Title: " + mNicePlace.get(i).getTitle());
-        viewHolder.body.setText("Body: " + mNicePlace.get(i).getText());
+        viewHolder.body.setText("Body: " + mNicePlace.get(i).getText());*/
       /*  RequestOptions defaultOprions = new RequestOptions().error(R.drawable.ic_launcher_background);
         Glide.with(context).setDefaultRequestOptions(defaultOprions)
                 .load(mNicePlace.get(i).getImageUrl())
                 .into(viewHolder.mImageView);*/
+        viewHolder.userId.setText("User Id: " + mComments.get(i).getPostId().toString());
+        viewHolder.id.setText("id: " + mNicePlace.get(i).getId().toString());
+        viewHolder.title.setText("Title: " + mNicePlace.get(i).getTitle());
+        viewHolder.body.setText("Body: " + mNicePlace.get(i).getText());
 
 
     }
@@ -52,6 +58,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public void setItems(List<Post> posts) {
         mNicePlace = posts;
+        notifyDataSetChanged();
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.mComments = comments;
         notifyDataSetChanged();
     }
 

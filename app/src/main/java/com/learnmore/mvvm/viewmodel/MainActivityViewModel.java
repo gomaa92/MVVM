@@ -3,7 +3,9 @@ package com.learnmore.mvvm.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 
+import com.learnmore.mvvm.models.Comment;
 import com.learnmore.mvvm.models.NicePlace;
 import com.learnmore.mvvm.models.Post;
 import com.learnmore.mvvm.repositories.NicePlaceRepo;
@@ -14,12 +16,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class MainActivityViewModel extends ViewModel {
 
     MutableLiveData<List<NicePlace>> mNicePlaces;
     private NicePlaceRepo repo;
     MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
     public PublishSubject<List<Post>> posts = PublishSubject.create();
+    public PublishSubject<List<Comment>> comments = PublishSubject.create();
     public PublishSubject<Boolean> errorGetPosts = PublishSubject.create();
 
 
@@ -45,6 +50,20 @@ public class MainActivityViewModel extends ViewModel {
                 .subscribe(it -> {
                     // Log.e(TAG, "getPosts: "+it.get(0).getTitle() );
                     posts.onNext(it);
+                }, throwable -> {
+                    errorGetPosts.onNext(true);
+                });
+
+    }
+
+    public void getComments(int id) {
+
+        repo.getComments(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(it -> {
+                     Log.e(TAG, "getPosts: "+it.get(0).getBody() );
+                    comments.onNext(it);
                 }, throwable -> {
                     errorGetPosts.onNext(true);
                 });

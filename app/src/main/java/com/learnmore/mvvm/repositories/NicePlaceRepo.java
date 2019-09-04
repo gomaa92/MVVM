@@ -2,6 +2,7 @@ package com.learnmore.mvvm.repositories;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.learnmore.mvvm.models.Comment;
 import com.learnmore.mvvm.models.NicePlace;
 import com.learnmore.mvvm.models.Post;
 import com.learnmore.mvvm.network.ServicesClass;
@@ -39,6 +40,10 @@ public class NicePlaceRepo {
     public Observable<List<Post>> getPosts() {
         return servicesClass.getPosts();
 
+    }
+
+    public Observable<List<Comment>> getComments(int id) {
+        return servicesClass.getSpecificComments(id);
 
     }
 

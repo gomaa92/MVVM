@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private ProgressBar progressBar;
     private MainActivityViewModel mainActivityViewModel;
-   // List<Post> myPosts;
+    // List<Post> myPosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         mainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mainActivityViewModel.init();
-       // myPosts = new ArrayList<>();
+
+        // myPosts = new ArrayList<>();
 
       /*  mainActivityViewModel.getNicePlaces().observe(this, new Observer<List<NicePlace>>() {
             @Override
@@ -44,10 +45,16 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });*/
-
+/*
         mainActivityViewModel.posts.subscribe(posts -> {
             adapter.setItems(posts);
+        });*/
+
+
+        mainActivityViewModel.comments.subscribe(comments -> {
+            adapter.setComments(comments);
         });
+
 
         mainActivityViewModel.errorGetPosts.subscribe(posts -> {
             if (posts == true) {
@@ -55,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mainActivityViewModel.getPosts();
+      //  mainActivityViewModel.getPosts();
+        mainActivityViewModel.getComments(2);
 
 
      /*   mainActivityViewModel.getIsUpdating().observe(this, new Observer<Boolean>() {

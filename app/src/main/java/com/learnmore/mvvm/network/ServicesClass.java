@@ -1,5 +1,6 @@
 package com.learnmore.mvvm.network;
 
+import com.learnmore.mvvm.models.Comment;
 import com.learnmore.mvvm.models.Post;
 
 import java.util.List;
@@ -16,6 +17,10 @@ public class ServicesClass {
     public Observable<List<Post>> getPosts() {
         return jsonPlaceholderApi.getPosts();
 
+    }
+
+    public Observable<List<Comment>> getSpecificComments(int id) {
+        return jsonPlaceholderApi.getComments(id);
 
     }
 
